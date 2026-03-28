@@ -7,7 +7,23 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
+  <!-- Splash screen -->
+  <div class="splash" id="splash" onclick="enterSite()">
+    <div class="splash-content">
+      <div class="splash-icon">🦉</div>
+      <h1 class="splash-title">Has recibido una carta de Hogwarts</h1>
+      <div class="splash-divider"></div>
+      <p class="splash-text">Toca para abrir</p>
+    </div>
+  </div>
+
+  <!-- Audio -->
+  <audio id="bg-music" loop>
+    <source src="hedwin.mp3" type="audio/mpeg">
+  </audio>
+  <button class="music-toggle" id="music-toggle" onclick="toggleMusic()" style="display:none;">🔊</button>
+
+  <div class="container" id="main-content" style="display:none;">
     <!-- Stars -->
     <div class="stars">
       <span class="star">✦</span>

@@ -1,6 +1,40 @@
 let currentType = 'individual';
 let adults = 1;
 let kids = 1;
+let musicPlaying = false;
+
+function enterSite() {
+  const splash = document.getElementById('splash');
+  const main = document.getElementById('main-content');
+  const music = document.getElementById('bg-music');
+  const toggle = document.getElementById('music-toggle');
+
+  splash.classList.add('hidden');
+  main.style.display = '';
+  toggle.style.display = 'flex';
+
+  music.volume = 0.3;
+  music.play().then(() => {
+    musicPlaying = true;
+  }).catch(() => {
+    // Browser blocked autoplay, that's ok
+  });
+}
+
+function toggleMusic() {
+  const music = document.getElementById('bg-music');
+  const toggle = document.getElementById('music-toggle');
+
+  if (musicPlaying) {
+    music.pause();
+    toggle.textContent = '🔇';
+    musicPlaying = false;
+  } else {
+    music.play();
+    toggle.textContent = '🔊';
+    musicPlaying = true;
+  }
+}
 
 function setType(type) {
   currentType = type;
