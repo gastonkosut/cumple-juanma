@@ -118,7 +118,7 @@ async function sendConfirmationEmail(email, name) {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        from: 'Cumple de Juanma <onboarding@resend.dev>',
+        from: 'Cumple de Juanma <fiesta@cumplejuanma.lat>',
         to: [email],
         subject: '🦉 ¡Confirmaste para el cumple de Juanma!',
         html: buildConfirmationEmail(name),
