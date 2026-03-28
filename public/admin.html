@@ -270,6 +270,7 @@
           <thead>
             <tr>
               <th>Nombre</th>
+              <th>Email</th>
               <th>Tipo</th>
               <th>Adultos</th>
               <th>Niños</th>
@@ -356,6 +357,7 @@
           : '<span class="type-badge type-individual">Individual</span>';
         return `<tr>
           <td>${esc(r.name)}</td>
+          <td>${esc(r.email || '-')}</td>
           <td>${typeBadge}</td>
           <td>${r.adults || 0}</td>
           <td>${r.kids || 0}</td>
@@ -382,10 +384,10 @@
     }
 
     function exportCsv() {
-      const header = 'Nombre,Tipo,Adultos,Niños,Alergias,Fecha\n';
+      const header = 'Nombre,Email,Tipo,Adultos,Niños,Alergias,Fecha\n';
       const rows = rsvps.map(r => {
         const date = new Date(r.createdAt).toLocaleDateString('es-AR');
-        return [r.name, r.type, r.adults || 0, r.kids || 0, r.allergies || '', date]
+        return [r.name, r.email || '', r.type, r.adults || 0, r.kids || 0, r.allergies || '', date]
           .map(v => '"' + String(v).replace(/"/g, '""') + '"')
           .join(',');
       }).join('\n');

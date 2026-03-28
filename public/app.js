@@ -49,9 +49,12 @@ async function submitRsvp() {
   submitBtn.textContent = 'Enviando lechuza...';
 
   try {
+    const email = document.getElementById('email').value.trim();
+
     const body = {
       name,
       type: currentType,
+      email,
       allergies
     };
 
