@@ -1,0 +1,4 @@
+node_modules/
+data/rsvps.json
+data/backups/
+.superpowers/

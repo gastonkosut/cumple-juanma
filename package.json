@@ -1,0 +1,12 @@
+{
+  "name": "cumple-juanma",
+  "version": "1.0.0",
+  "description": "RSVP web para el cumple de Juanma - Harry Potter / Gryffindor",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cumple de Juanma - 8 años!</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Stars -->
+    <div class="stars">
+      <span class="star">✦</span>
+      <span class="star">✦</span>
+      <span class="star">✦</span>
+      <span class="star">✦</span>
+      <span class="star">✦</span>
+    </div>
+
+    <!-- Crest -->
+    <div class="crest">🦉</div>
+
+    <!-- Header -->
+    <p class="subtitle-text">El Ministerio de la Magia informa que</p>
+    <h1 class="main-title">Juanma cumple 8!</h1>
+    <p class="invite-text">★ Estás invitado a la celebración ★</p>
+
+    <div class="divider"></div>
+
+    <!-- Event info -->
+    <div class="info-card">
+      <div>
+        <div class="info-label">Cuándo</div>
+        <div class="info-value">Viernes 17 de Abril, 2026</div>
+        <div class="info-detail">18:30 a 21:30 hs</div>
+      </div>
+      <div class="info-separator"></div>
+      <div>
+        <div class="info-label">Dónde</div>
+        <div class="info-value">Zona Prado</div>
+        <div class="info-detail">Adolfo Berro 912</div>
+      </div>
+    </div>
+
+    <!-- RSVP Form -->
+    <div class="form-card" id="rsvp-form">
+      <h3 class="form-title">Confirmá tu asistencia</h3>
+
+      <!-- Type toggle -->
+      <div class="type-toggle">
+        <button class="type-btn active" data-type="individual" onclick="setType('individual')">✍ Soy un mago/a</button>
+        <button class="type-btn" data-type="family" onclick="setType('family')">👨‍👩‍👧‍👦 Venimos en familia</button>
+      </div>
+
+      <!-- Name -->
+      <div class="form-group">
+        <label class="form-label" id="name-label">NOMBRE DEL MAGO/A</label>
+        <input class="form-input" type="text" id="name" placeholder="Ej: Hermione Granger">
+      </div>
+
+      <!-- Family fields -->
+      <div class="family-fields" id="family-fields">
+        <div class="counters">
+          <div class="counter">
+            <div class="counter-label">ADULTOS</div>
+            <div class="counter-controls">
+              <button class="counter-btn" onclick="changeCount('adults', -1)">−</button>
+              <span class="counter-value" id="adults-count">1</span>
+              <button class="counter-btn" onclick="changeCount('adults', 1)">+</button>
+            </div>
+          </div>
+          <div class="counter">
+            <div class="counter-label">NIÑOS</div>
+            <div class="counter-controls">
+              <button class="counter-btn" onclick="changeCount('kids', -1)">��</button>
+              <span class="counter-value" id="kids-count">1</span>
+              <button class="counter-btn" onclick="changeCount('kids', 1)">+</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Allergies -->
+      <div class="form-group">
+        <label class="form-label">ALERGIAS O RESTRICCIONES (OPCIONAL)</label>
+        <textarea class="form-textarea" id="allergies" placeholder="Ej: sin gluten, sin láctosa..."></textarea>
+      </div>
+
+      <!-- Submit -->
+      <button class="submit-btn" id="submit-btn" onclick="submitRsvp()">Confirmo asistencia ⚡</button>
+    </div>
+
+    <!-- Success -->
+    <div class="success-message" id="success-message">
+      <div class="success-icon">🦉</div>
+      <div class="success-title">¡Tu lechuza ha sido enviada!</div>
+      <div class="success-text">Gracias por confirmar. ¡Nos vemos en la fiesta!</div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">⚡ Hecho con magia ⚡</div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

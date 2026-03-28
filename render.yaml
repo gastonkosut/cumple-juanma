@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: cumple-juanma
+    runtime: node
+    buildCommand: npm install
+    startCommand: npm start
+    plan: free
+    envVars:
+      - key: ADMIN_KEY
+        generateValue: true
+      - key: NODE_ENV
+        value: production

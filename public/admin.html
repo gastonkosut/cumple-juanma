@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin - Cumple Juanma</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: linear-gradient(135deg, #2a0a0a 0%, #4a1111 30%, #2a0a0a 60%, #1a0505 100%);
+      color: #f0e6d3;
+      font-family: Georgia, 'Times New Roman', serif;
+      min-height: 100vh;
+      padding: 1.5rem;
+    }
+
+    .container { max-width: 800px; margin: 0 auto; }
+
+    h1 {
+      font-family: 'Cinzel Decorative', Georgia, serif;
+      color: #ffd700;
+      text-align: center;
+      font-size: 1.6rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #d4a843;
+      font-size: 0.85rem;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Login */
+    .login-card {
+      background: rgba(174, 0, 1, 0.08);
+      border: 1px solid rgba(174, 0, 1, 0.25);
+      border-radius: 12px;
+      padding: 2rem;
+      max-width: 350px;
+      margin: 3rem auto;
+      text-align: center;
+    }
+
+    .login-card h2 {
+      color: #ffd700;
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+    }
+
+    .login-input {
+      width: 100%;
+      padding: 0.7rem;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(174, 0, 1, 0.25);
+      border-radius: 6px;
+      color: #f0e6d3;
+      font-size: 0.9rem;
+      font-family: Georgia, serif;
+      outline: none;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    .login-input:focus { border-color: #ffd700; }
+
+    .login-btn {
+      padding: 0.7rem 2rem;
+      background: linear-gradient(135deg, #ae0001, #d4163c);
+      color: #ffd700;
+      border: 1px solid rgba(255, 215, 0, 0.3);
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: bold;
+      font-family: Georgia, serif;
+      cursor: pointer;
+    }
+
+    .login-error {
+      color: #ff6b6b;
+      font-size: 0.8rem;
+      margin-top: 0.5rem;
+      display: none;
+    }
+
+    /* Dashboard */
+    .dashboard { display: none; }
+
+    .stats {
+      display: flex;
+      gap: 0.8rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .stat {
+      flex: 1;
+      min-width: 100px;
+      background: rgba(174, 0, 1, 0.1);
+      border: 1px solid rgba(174, 0, 1, 0.3);
+      border-radius: 10px;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    .stat-value {
+      font-size: 1.8rem;
+      color: #ffd700;
+      font-weight: bold;
+    }
+
+    .stat-label {
+      font-size: 0.7rem;
+      color: #d4a843;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-top: 0.2rem;
+    }
+
+    /* Actions */
+    .actions {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .action-btn {
+      padding: 0.5rem 1rem;
+      background: rgba(174, 0, 1, 0.15);
+      border: 1px solid rgba(174, 0, 1, 0.3);
+      border-radius: 6px;
+      color: #d4a843;
+      font-size: 0.8rem;
+      font-family: Georgia, serif;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .action-btn:hover {
+      background: rgba(174, 0, 1, 0.3);
+      color: #ffd700;
+    }
+
+    /* Table */
+    .table-wrapper {
+      overflow-x: auto;
+      border-radius: 12px;
+      border: 1px solid rgba(174, 0, 1, 0.25);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+    }
+
+    th {
+      background: rgba(174, 0, 1, 0.2);
+      color: #d4a843;
+      font-size: 0.7rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 0.8rem 0.6rem;
+      text-align: left;
+      white-space: nowrap;
+    }
+
+    td {
+      padding: 0.7rem 0.6rem;
+      border-top: 1px solid rgba(174, 0, 1, 0.1);
+    }
+
+    tr:hover { background: rgba(174, 0, 1, 0.05); }
+
+    .type-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+    }
+
+    .type-individual {
+      background: rgba(255, 215, 0, 0.1);
+      color: #d4a843;
+    }
+
+    .type-family {
+      background: rgba(174, 0, 1, 0.15);
+      color: #f0a0a0;
+    }
+
+    .delete-btn {
+      background: none;
+      border: 1px solid rgba(174, 0, 1, 0.3);
+      color: #a05050;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.75rem;
+      font-family: Georgia, serif;
+    }
+
+    .delete-btn:hover {
+      background: rgba(174, 0, 1, 0.2);
+      color: #ff6b6b;
+    }
+
+    .empty-message {
+      text-align: center;
+      padding: 3rem;
+      color: #6a3030;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 600px) {
+      .stats { gap: 0.5rem; }
+      .stat { min-width: 70px; padding: 0.7rem 0.5rem; }
+      .stat-value { font-size: 1.4rem; }
+      table { font-size: 0.75rem; }
+      th, td { padding: 0.5rem 0.4rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🦉 Panel Admin</h1>
+    <p class="subtitle">Confirmaciones para el cumple de Juanma</p>
+
+    <!-- Login -->
+    <div class="login-card" id="login">
+      <h2>Ingresá la clave</h2>
+      <input class="login-input" type="password" id="key-input" placeholder="Clave de admin" onkeydown="if(event.key==='Enter')login()">
+      <br>
+      <button class="login-btn" onclick="login()">Entrar</button>
+      <div class="login-error" id="login-error">Clave incorrecta</div>
+    </div>
+
+    <!-- Dashboard -->
+    <div class="dashboard" id="dashboard">
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-value" id="total-rsvps">0</div>
+          <div class="stat-label">Confirmaciones</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value" id="total-adults">0</div>
+          <div class="stat-label">Adultos</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value" id="total-kids">0</div>
+          <div class="stat-label">Niños</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value" id="total-people">0</div>
+          <div class="stat-label">Total personas</div>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="action-btn" onclick="exportCsv()">📋 Exportar CSV</button>
+        <button class="action-btn" onclick="loadRsvps()">🔄 Actualizar</button>
+      </div>
+
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Tipo</th>
+              <th>Adultos</th>
+              <th>Niños</th>
+              <th>Alergias</th>
+              <th>Fecha</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="rsvp-table"></tbody>
+        </table>
+      </div>
+
+      <div class="empty-message" id="empty-message" style="display:none;">
+        Todavía no hay confirmaciones. ¡Las lechuzas están en camino!
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let adminKey = '';
+    let rsvps = [];
+
+    // Check for key in URL
+    const urlKey = new URLSearchParams(window.location.search).get('key');
+    if (urlKey) {
+      adminKey = urlKey;
+      tryLogin();
+    }
+
+    async function login() {
+      adminKey = document.getElementById('key-input').value;
+      await tryLogin();
+    }
+
+    async function tryLogin() {
+      try {
+        const res = await fetch('/api/rsvps?key=' + encodeURIComponent(adminKey));
+        if (!res.ok) throw new Error();
+        rsvps = await res.json();
+        showDashboard();
+      } catch {
+        document.getElementById('login-error').style.display = 'block';
+        document.getElementById('login').style.display = '';
+        document.getElementById('dashboard').style.display = 'none';
+      }
+    }
+
+    function showDashboard() {
+      document.getElementById('login').style.display = 'none';
+      document.getElementById('dashboard').style.display = 'block';
+      renderTable();
+    }
+
+    async function loadRsvps() {
+      const res = await fetch('/api/rsvps?key=' + encodeURIComponent(adminKey));
+      rsvps = await res.json();
+      renderTable();
+    }
+
+    function renderTable() {
+      const tbody = document.getElementById('rsvp-table');
+      const empty = document.getElementById('empty-message');
+
+      if (rsvps.length === 0) {
+        tbody.innerHTML = '';
+        empty.style.display = '';
+        updateStats(0, 0, 0);
+        return;
+      }
+
+      empty.style.display = 'none';
+
+      let totalAdults = 0;
+      let totalKids = 0;
+
+      tbody.innerHTML = rsvps.map(r => {
+        totalAdults += r.adults || 0;
+        totalKids += r.kids || 0;
+        const date = new Date(r.createdAt).toLocaleDateString('es-AR', {
+          day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit'
+        });
+        const typeBadge = r.type === 'family'
+          ? '<span class="type-badge type-family">Familia</span>'
+          : '<span class="type-badge type-individual">Individual</span>';
+        return `<tr>
+          <td>${esc(r.name)}</td>
+          <td>${typeBadge}</td>
+          <td>${r.adults || 0}</td>
+          <td>${r.kids || 0}</td>
+          <td>${esc(r.allergies || '-')}</td>
+          <td>${date}</td>
+          <td><button class="delete-btn" onclick="deleteRsvp('${r.id}')">✕</button></td>
+        </tr>`;
+      }).join('');
+
+      updateStats(rsvps.length, totalAdults, totalKids);
+    }
+
+    function updateStats(count, adults, kids) {
+      document.getElementById('total-rsvps').textContent = count;
+      document.getElementById('total-adults').textContent = adults;
+      document.getElementById('total-kids').textContent = kids;
+      document.getElementById('total-people').textContent = adults + kids;
+    }
+
+    async function deleteRsvp(id) {
+      if (!confirm('¿Eliminar esta confirmación?')) return;
+      await fetch('/api/rsvps/' + id + '?key=' + encodeURIComponent(adminKey), { method: 'DELETE' });
+      await loadRsvps();
+    }
+
+    function exportCsv() {
+      const header = 'Nombre,Tipo,Adultos,Niños,Alergias,Fecha\n';
+      const rows = rsvps.map(r => {
+        const date = new Date(r.createdAt).toLocaleDateString('es-AR');
+        return [r.name, r.type, r.adults || 0, r.kids || 0, r.allergies || '', date]
+          .map(v => '"' + String(v).replace(/"/g, '""') + '"')
+          .join(',');
+      }).join('\n');
+
+      const blob = new Blob([header + rows], { type: 'text/csv' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'confirmaciones-cumple-juanma.csv';
+      a.click();
+    }
+
+    function esc(str) {
+      const el = document.createElement('span');
+      el.textContent = str;
+      return el.innerHTML;
+    }
+  </script>
+</body>
+</html>
