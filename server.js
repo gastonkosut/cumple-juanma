@@ -154,7 +154,7 @@ app.post('/api/rsvp', (req, res) => {
     name: name.trim(),
     type: rsvpType,
     adults: rsvpType === 'family' ? Math.max(0, parseInt(adults) || 0) : 0,
-    kids: rsvpType === 'family' ? Math.max(1, parseInt(kids) || 1) : 1,
+    kids: rsvpType === 'family' ? Math.max(0, parseInt(kids) || 0) : 1,
     email: (email || '').trim(),
     allergies: (allergies || '').trim(),
     createdAt: new Date().toISOString()
